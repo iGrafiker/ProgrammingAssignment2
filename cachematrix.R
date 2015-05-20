@@ -1,15 +1,56 @@
 ## Put comments here that give an overall description of what your
 ## functions do
 
-## Write a short comment describing this function
+y <- matrix(c(-1, -2, 1, 1), 2,2) # define a matrix for test
 
+## The function makeCacheMatrix creates four functions to set up a matrix and cache it, 
+## to get this matrix from cache, to cache the inverse of this matrix 
+## and last to get a already computed invers matrix from cache.
+## The function makeCacheMatrix returns a list containing the names of the four functions.
 makeCacheMatrix <- function(x = matrix()) {
-
+  inverseMatrix <- NULL
+  
+  #set matrix in cache
+  setCache <- function(y){
+    x <<- y
+    inverseMatrix <<- NULL
+  }
+  
+  #get matrix from cache
+  getCache <- function(){
+    x
+  }
+  
+  #set inverse matrix in cache
+  setInverse <- function(solveResult){
+    inverseMatrix <<- solveResult
+  }
+  
+  #get inverse matrix from cache
+  getInverse <-function(){
+    inverseMatrix
+  }
+  # return a list with the four named functions
+  list(setCache = setCache, getCache = getCache, setInverse = setInverse, getInverse = getInverse)
 }
 
 
-## Write a short comment describing this function
-
+# The function cacheSolve computes the invers of the matrix provided by makeCacheMatrix. 
+## If the inverse matrix has already computed and the matrix has not been changed, 
+## then the function retrieve the inverse matrix from cache.
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+    ## Return a matrix that is the inverse of 'x'
+  
+    inverseMatrix <- x$getInverse() # read inverse matrix from cache
+    ## if no inverse matrix found in cache
+    if (is.null(inverseMatrix)){ 
+        data <- x$getCache() # get the matrix from cache
+        solveResult <- solve(data) # compute the inverse matrix
+        x$setInverse(solveResult) # set inverse matrix to cache
+    }
+    ## if inverse matrix was already computed
+    else{ 
+        message("getting cached data") 
+        inverseMatrix #return inverse matrix
+    }
 }
