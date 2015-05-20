@@ -1,11 +1,13 @@
 ## Put comments here that give an overall description of what your
 ## functions do
 
-y <- matrix(c(-1, -2, 1, 1), 2,2) # define a matrix for test
+y <- matrix(c(-1, -2, 1, 1), 2,2) # creates a matrix for testing purposes
 
-## The function below creates four functions to set up a matrix and cache it, 
-## to get this matrix from cache, to cache the inverse of this matrix 
-## and last to get a already computed invers matrix from cache.
+## The function below creates four functions. 
+## 1) to set up a matrix and cache it, 
+## 2) to get this matrix from cache, 
+## 3) to cache the inverse of this matrix and
+## 4) to get a already computed invers matrix from cache.
 ## The function makeCacheMatrix returns a list containing the names of the four functions.
 makeCacheMatrix <- function(x = matrix()) {
     inverseMatrix <- NULL
